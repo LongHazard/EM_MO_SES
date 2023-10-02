@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="/changelog/20230612-1036-database-ems-version3.xml" relativeToChangelogFile="true"/>
+    <include file="/data/20230606-0926-insert-data-card-type.xml" relativeToChangelogFile="true"/>
+    <include file="data/20230606-0926-insert-data-color.xml" relativeToChangelogFile="true"/>
+    <include file="data/20230606-0926-insert-data-vehicle-brand.xml" relativeToChangelogFile="true"/>
+    <include file="data/20230606-0926-insert-data-vehicle-type.xml" relativeToChangelogFile="true"/>
+    <include file="/data/provinces-data.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>
+

@@ -1,0 +1,14 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="20230606-0926-insert-data-card-type" author="luatnq" runOnChange="true">
+        <loadData file="db/data/csv/data_card_type.csv" separator="," tableName="card_type">
+<!--            <column header="id" name="id" type="BIGINT"/>-->
+            <column header="name" name="name" type="STRING"/>
+            <column header="description" name="description" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20230606-0926-database-ems-test" author="luatnq">
+        <!--create  card_type-->
+        <createTable tableName="card_type">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(200)"/>
+            <column name="identity" type="VARCHAR(200)"/>
+        </createTable>
+
+        <!--create  person_card-->
+        <createTable tableName="person_card">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_type_id" type="BIGINT">
+                <constraints foreignKeyName="fk_person_card_type_id"
+                             referencedTableName="card_type"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+            <column name="card_code" type="VARCHAR(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="date_of_birth" type="VARCHAR(200)"/>
+            <column name="sex" type="VARCHAR(200)"/>
+            <column name="nationality" type="VARCHAR(200)"/>
+            <!--            <column name="place_of_origin" type="VARCHAR(200)"/>-->
+            <!--            <column name="permanent_resident" type="VARCHAR(200)"/>-->
+            <column name="issue_on" type="BIGINT"/>
+            <column name="date_of_expiry" type="BIGINT"/>
+            <column name="place_of_issue" type="VARCHAR(200)"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+            <column name="created_at" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_at" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+        </createTable>
+
+        <!--create  persons-->
+        <createTable tableName="persons">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uid" type="VARCHAR(200)"/>
+            <column name="email" type="VARCHAR(200)"/>
+            <column name="phone_number" type="VARCHAR(200)"/>
+            <column name="staff_code" type="VARCHAR(200)"/>
+            <column name="position" type="VARCHAR(200)"/>
+            <column name="department" type="VARCHAR(200)"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+            <column name="org" type="VARCHAR(255)"/>
+            <column name="sex" type="VARCHAR(255)"/>
+            <column name="created_at" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_at" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+            <column name="face_id" type="VARCHAR(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="person_card_id" type="BIGINT">
+                <constraints foreignKeyName="fk_person_card_id"
+                             referencedTableName="person_card"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+        </createTable>
+
+        <!--create  vehicle_type-->
+        <createTable tableName="vehicle_type">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="identity" type="VARCHAR(255)"/>
+        </createTable>
+
+        <!--create  vehicle_brand-->
+        <createTable tableName="vehicle_brand">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--create  vehicle_card-->
+        <createTable tableName="vehicle_card">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_type_id" type="BIGINT">
+                <constraints foreignKeyName="fk_vehicle_card_type_id"
+                             referencedTableName="card_type"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+            <column name="card_code" type="VARCHAR(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="brand_id" type="BIGINT">
+                <constraints foreignKeyName="fk_vehicle_card_to_branch_id"
+                             referencedTableName="vehicle_brand"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+            <column name="vehicle_type_id" type="BIGINT">
+                <constraints foreignKeyName="fk_vehicle_card_to_type_id"
+                             referencedTableName="vehicle_type"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+            <column name="registration_date" type="BIGINT"/>
+            <column name="license_plate" type="VARCHAR(200)"/>
+            <column name="permanent_resident" type="BIGINT"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+            <column name="created_at" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_at" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+        </createTable>
+
+        <!--create  vehicles-->
+        <createTable tableName="vehicles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="brand_id" type="BIGINT">
+                <constraints foreignKeyName="fk_vehicle_to_branch_id"
+                             referencedTableName="vehicle_brand"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+            <column name="type_id" type="BIGINT">
+                <constraints foreignKeyName="fk_vehicle_to_type_id"
+                             referencedTableName="vehicle_type"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+            <column name="uid" type="VARCHAR(200)"/>
+            <column name="license_plate" type="VARCHAR(200)"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+            <column name="created_at" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_at" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+            <column name="vehicle_card_id" type="BIGINT">
+                <constraints foreignKeyName="fk_vehicle_card_id"
+                             referencedTableName="vehicle_card"
+                             referencedColumnNames="id"
+                             nullable="true"/>
+            </column>
+        </createTable>
+
+        <!--create  groups-->
+        <createTable tableName="groups">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+            <column name="created_at" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_at" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="groups"
+                                 constraintName="parentId_id_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="groups"
+
+        />
+
+        <!--create  identity_object_group-->
+        <createTable tableName="identity_object_group">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="vehicle_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_at" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="group_id"
+                                 baseTableName="identity_object_group"
+                                 constraintName="identity_object_group_to_groups_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="groups"/>
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="identity_object_group"
+                                 constraintName="identity_object_group_to_vehicles_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicles"/>
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="identity_object_group"
+                                 constraintName="identity_object_group_to_persons_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="persons"
+        />
+
+        <!--create  identity_object-->
+        <createTable tableName="identity_object">
+            <column name="vehicle_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_io_vehicle_id"
+                             referencedTableName="vehicles"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="person_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_person_id"
+                             referencedTableName="persons"
+                             referencedColumnNames="id"
+
+                />
+            </column>
+        </createTable>
+
+        <!--create  colors-->
+        <createTable tableName="colors">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"
+            />
+        </createTable>
+
+        <!--create  vehicle_color-->
+        <createTable tableName="vehicle_color">
+            <column name="vehicle_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_color_vehicle_id"
+                             referencedTableName="vehicles"
+                             referencedColumnNames="id"
+                />
+            </column>
+            <column name="color_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_vehicle_color_id"
+                             referencedTableName="colors"
+                             referencedColumnNames="id"
+                />
+            </column>
+        </createTable>
+
+        <!--create  vehicle_card_color-->
+        <createTable tableName="vehicle_card_color">
+            <column name="vehicle_card_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_color_vehicle_card_id"
+                             referencedTableName="vehicle_card"
+                             referencedColumnNames="id"
+                />
+            </column>
+            <column name="color_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_vehicle_card_color_id"
+                             referencedTableName="colors"
+                             referencedColumnNames="id"
+                />
+            </column>
+        </createTable>
+
+
+        <!--create  images-->
+        <createTable tableName="images">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="url" type="varchar(255)"/>
+            <column name="content_type" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="bucket_name" type="varchar(255)"/>
+            <column name="type" type="varchar(255)"/>
+
+            <column name="vehicle_id" type="BIGINT">
+                <constraints foreignKeyName="fk_image_vehicle_id"
+                             referencedTableName="vehicles"
+                             referencedColumnNames="id"
+                             nullable="true"
+                />
+            </column>
+
+            <column name="person_id" type="BIGINT">
+                <constraints foreignKeyName="fk_images_person_id"
+                             referencedTableName="persons"
+                             referencedColumnNames="id"
+                             nullable="true"
+                />
+            </column>
+
+            <column name="vehicle_card_id" type="BIGINT">
+                <constraints foreignKeyName="fk_image_vehicle_card_id"
+                             referencedTableName="vehicle_card"
+                             referencedColumnNames="id"
+                             nullable="true"
+                />
+            </column>
+
+            <column name="person_card_id" type="BIGINT">
+                <constraints foreignKeyName="fk_image_person_card_id"
+                             referencedTableName="person_card"
+                             referencedColumnNames="id"
+                             nullable="true"
+                />
+            </column>
+            <column name="is_deleted" type="bool" defaultValue="false"/>
+            <column name="created_at" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_at" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+        </createTable>
+
+        <!--create  provinces-->
+        <createTable tableName="provinces">
+            <column name="code" type="VARCHAR(20)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_en" type="VARCHAR(255)"/>
+            <column name="full_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name_en" type="VARCHAR(255)"/>
+            <column name="code_name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <!--create  districts-->
+        <createTable tableName="districts">
+            <column name="code" type="VARCHAR(20)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_en" type="VARCHAR(255)"/>
+            <column name="full_name" type="VARCHAR(255)"/>
+            <column name="full_name_en" type="VARCHAR(255)"/>
+            <column name="code_name" type="VARCHAR(255)"/>
+            <column name="province_code" type="VARCHAR(20)">
+                <constraints foreignKeyName="fk_province_id"
+                             referencedTableName="provinces"
+                             referencedColumnNames="code"
+                />
+            </column>
+        </createTable>
+
+        <!--create  wards-->
+        <createTable tableName="wards">
+            <column name="code" type="VARCHAR(20)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_en" type="VARCHAR(255)"/>
+            <column name="full_name" type="VARCHAR(255)"/>
+            <column name="full_name_en" type="VARCHAR(255)"/>
+            <column name="code_name" type="VARCHAR(255)"/>
+            <column name="district_code" type="VARCHAR(20)">
+                <constraints foreignKeyName="fk_district_id"
+                             referencedTableName="districts"
+                             referencedColumnNames="code"
+                />
+            </column>
+
+        </createTable>
+
+        <!--create  address-->
+        <createTable tableName="address">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="province_code" type="VARCHAR(200)">
+                <constraints foreignKeyName="fk_province_code"
+                             referencedTableName="provinces"
+                             referencedColumnNames="code"
+                             nullable="false"/>
+            </column>
+            <column name="district_code" type="VARCHAR(200)">
+                <constraints foreignKeyName="fk_district_code"
+                             referencedTableName="districts"
+                             referencedColumnNames="code"
+                             nullable="false"/>
+            </column>
+            <column name="ward_code" type="VARCHAR(200)">
+                <constraints foreignKeyName="fk_ward_code"
+                             referencedTableName="wards"
+                             referencedColumnNames="code"
+                             nullable="false"/>
+            </column>
+            <column name="address_detail" type="VARCHAR(200)"/>
+            <column name="person_card_id" type="BIGINT">
+                <constraints foreignKeyName="fk_address_person_card_id"
+                             referencedTableName="person_card"
+                             referencedColumnNames="id"
+                             nullable="true"
+                />
+            </column>
+            <column name="type" type="VARCHAR(200)"/>
+            <column name="is_deleted" type="BOOLEAN"/>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,22 @@
+server:
+  port: ${PORT:8994}
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  application:
+    name: ${APPLICATION_NAME:ems}
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://192.168.14.79:5432/ems-local}
+    username: ${DATASOURCE_USERNAME:dbuser}
+    password: ${DATASOURCE_PASSWORD:admin2023}
+
+  liquibase:
+    change-log: classpath:db/master.xml
+
+application:
+  minio:
+    bucket-name: ${MINIO_BUCKET_NAME:ems}
+    url: ${MINIO_URL:http://192.168.14.79:9000}
+    access-key: ${MINIO_ACCESS_KEY:abL1gtwyzEWlIEccf8BC}
+    secret-key: ${MINIO_SECRET_KEY:rP2gX82JlGCKzwo8kzjggrZdtasrOcjTXjJrUhZh}

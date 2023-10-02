@@ -1,0 +1,3 @@
+card_type_id,card_code,date_of_birth,sex,nationality,place_of_origin,permanent_resident,issue_on,date_of_expiry,place_of_issue,is_deleted
+1,cardcode001,991369614000,male,Viet Nam, Viet Nam,1685420814,1685593614000,1685593614001,issue1,false
+2,cardcode002,991369614000,female,Viet Nam, Viet Nam,1685420814,1685593614000,1685593614001,issue1,false

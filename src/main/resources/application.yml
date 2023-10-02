@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: ems
+  profiles:
+    active:
+      - dev
+  #      - dev-local
+  liquibase:
+    change-log: classpath:db/master.xml
+#server:
+#  port: 8993
+

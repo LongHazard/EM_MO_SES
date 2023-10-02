@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  web:
+    container_name: "ems-backend"
+    build: .
+    ports:
+      - "8994:8994"
+    networks:
+      - ems-network-dev
+    environment:
+      PORT: 8994
+      APPLICATION_NAME: ems-service
+      DATASOURCE_URL: jdbc:postgresql://192.168.14.79:5432/ems-local
+      DATASOURCE_USERNAME: dbuser
+      DATASOURCE_PASSWORD: admin2023
+      MINIO_BUCKET_NAME: ems
+      MINIO_URL: http://192.168.14.79:9000
+      MINIO_ACCESS_KEY: abL1gtwyzEWlIEccf8BC
+      MINIO_SECRET_KEY: rP2gX82JlGCKzwo8kzjggrZdtasrOcjTXjJrUhZh
+    restart: always
+networks:
+  ems-network-dev:
+    driver: bridge

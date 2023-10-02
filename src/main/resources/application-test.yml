@@ -1,0 +1,22 @@
+server:
+  port: ${PORT:8999}
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  application:
+    name: ems
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:h2:mem:mydb}
+    username: ${DATASOURCE_USERNAME:sa}
+    password: ${DATASOURCE_PASSWORD:password}
+
+  liquibase:
+    change-log: classpath:db/master-test.xml
+
+application:
+  minio:
+    bucket-name: ${MINIO_BUCKET_NAME:ems}
+    url: ${MINIO_URL:http://192.168.14.79:9000}
+    access-key: ${MINIO_ACCESS_KEY:abL1gtwyzEWlIEccf8BC}
+    secret-key: ${MINIO_SECRET_KEY:rP2gX82JlGCKzwo8kzjggrZdtasrOcjTXjJrUhZh}

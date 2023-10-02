@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="20230606-0926-insert-vehicle-card" author="luatnq" runOnChange="true">
+        <loadData file="db/data/csv/data_vehicle_card.csv" separator="," tableName="vehicle_card">
+<!--            <column header="id" name="id" type="BIGINT"/>-->
+            <column header="card_type_id" name="card_type_id" type="STRING"/>
+            <column header="card_code" name="card_code" type="STRING"/>
+            <column header="brand_id" name="brand_id" type="STRING"/>
+            <column header="vehicle_type_id" name="vehicle_type_id" type="STRING"/>
+            <column header="registration_date" name="registration_date" type="BIGINT"/>
+            <column header="license_plate" name="license_plate" type="STRING"/>
+            <column header="permanent_resident" name="permanent_resident" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

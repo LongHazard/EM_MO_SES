@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20230602-1528-address.xml" author="tan">
+        <createTable tableName="address">
+            <column name="id" type="VARCHAR(200)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="province_code" type="VARCHAR(200)">
+                <constraints foreignKeyName="fk_province_code"
+                             referencedTableName="provinces"
+                             referencedColumnNames="code"
+                             nullable="false"/>
+            </column>
+            <column name="district_code" type="VARCHAR(200)">
+                <constraints foreignKeyName="fk_district_code"
+                             referencedTableName="districts"
+                             referencedColumnNames="code"
+                             nullable="false"/>
+            </column>
+            <column name="ward_code" type="VARCHAR(200)">
+                <constraints foreignKeyName="fk_ward_code"
+                             referencedTableName="wards"
+                             referencedColumnNames="code"
+                             nullable="false"/>
+            </column>
+            <column name="address_detail" type="VARCHAR(200)"/>
+            <column name="person_card_id" type="VARCHAR(200)">
+                <constraints foreignKeyName="fk_person_card_id"
+                             referencedTableName="person_card"
+                             referencedColumnNames="id"
+                             nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(200)"/>
+            <column name="is_deleted" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
